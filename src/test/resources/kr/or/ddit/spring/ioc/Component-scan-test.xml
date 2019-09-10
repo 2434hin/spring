@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 
+		<bean> 엘레멘트를 이용하여 스프링 빈으로 등록 하던 방식에서 
+		특정 패키지 이하의 클래스를 스캔하며 @Controller, @Service, @Reporitory, @Component
+		어노테이션이 붙은 클래스틀을 자동으로 스프링 빈으로 생성	
+		@Controller : controller를 상징
+		@Service : service를 상징
+		@Repository : dao를 상징
+		@Component : 위 세가지가 아닌경우 표현
+	-->
+	
+	<!-- 
+		base-package : 스캔할 패키지 기준 위치를 지정 
+		use-default-filter(default=true) : 위에서 언급한 4가지 어노체이션을 스캔
+		해당 옵션을 false로 설정하여 개발자가 필요로하는 어노테이션에 대해서만 스캔하도록 설정하는 것이 가능
+		<context:include-filter>, <context:exclude-filter> 두엘리멘트를 활용하여
+		어노체이션 필터를 설정
+	-->
+	<context:component-scan base-package="kr.or.ddit">
+	</context:component-scan>
+	
+	<!-- 스캔 이후에 @Resourd, @Autowired, @Inject 어노테이션엥 대한 후처리 -->
+	<context:annotation-config/>
+
+</beans>

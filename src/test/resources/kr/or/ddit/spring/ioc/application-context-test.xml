@@ -39,4 +39,39 @@
 	<!-- prototype 스코프는 해당 스프링 빈을 요청할 때마다 새로운 객체를 생성하여 전달 -->
 	<bean id="boardDaoP" class="kr.or.ddit.test.board.dao.BoardDao" scope="prototype"></bean>
 	
+	<!-- collection 객체 동적 생성 -->
+	<!-- 
+		collectionBean class의 객체를 생성하여 스프링 빈으로 등록하고
+		collectionBean class의 list, map, set, properties 필드의 값을 셋터 주입을 한다.
+	 -->
+	<bean name="collectionBean" class="kr.or.ddit.test.ioc.CollectionBean">
+		<property name="list">
+			<list>
+				<value>brown</value>
+				<value>cony</value>
+				<value>sally</value>
+			</list>
+		</property>
+		
+		<property name="set">
+			<set>
+				<value>moon</value>
+				<value>james</value>
+			</set>
+		</property>
+		
+		<property name="map">
+			<map>
+				<entry key="userId" value="brown"/>
+				<entry key="alias" value="곰"/>
+			</map>
+		</property>
+		
+		<property name="properties">
+			<props>
+				<prop key="userId">brown</prop>
+				<prop key="userNm">브라운</prop>
+			</props>
+		</property>
+	</bean>
 </beans>
