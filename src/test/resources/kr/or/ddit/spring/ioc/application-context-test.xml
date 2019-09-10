@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 스프링을 통해 관리하고자 하는 객체(스프링 번, 번)을 선언 : <bean> -->
+	
+	<!-- 
+		name : 스프링 컨테이너에서 관리되는 객체의 이름 - 개발자가 작성
+		class : 해당 스프링 객체의 구현 클래스의  full name 
+		boardDao라는 이름으로  kr.or.ddit.test.board.dao.BoardDao 클래스로부터 객체를 생성
+	-->
+	<bean name="boardDao" class="kr.or.ddit.test.board.dao.BoardDao"/>
+
+	<!-- 
+		boardService이름으로  kr.or.ddit.test.board.service.BoardService 클래스를 이용하여 스프링 객체를 생성 
+		BoardService 클래스의 boardDao필드(<property name>)에 
+		boardDao라는 이름의 스프링 빈을 주입 (<property ref>)
+	-->
+	<bean name="boardService" class="kr.or.ddit.test.board.service.BoardService">
+		<!-- DI (Dependency Injection), setter 주입 -->
+		<property name="boardDao" ref="boardDao"/>
+		<property name="boardNm" value="Q/A"/>
+	</bean>
+	
+	<bean name="boardServiceCo" class="kr.or.ddit.test.board.service.BoardService">
+		<!-- boardDao 생성자 주입 -->
+		<constructor-arg index="0" ref="boardDao"/>
+		<!-- setter을 통해 boardNm 속성을 주입 -->
+<!-- 		<property name="boardNm" value="Q/A-C"/> -->
+		<constructor-arg index="1" value="Q/A-C"/>
+	</bean>
+	
+	<!-- spring bean scope singleton 테스트를 위한 빈 선언 -->
+	<bean id="boardDaoS1" class="kr.or.ddit.test.board.dao.BoardDao"/>
+	<bean id="boardDaoS2" class="kr.or.ddit.test.board.dao.BoardDao"/>
+	
+	<!-- spring bean scope prototype 테스트를 위한 빈 선언 -->
+	<!-- prototype 스코프는 해당 스프링 빈을 요청할 때마다 새로운 객체를 생성하여 전달 -->
+	<bean id="boardDaoP" class="kr.or.ddit.test.board.dao.BoardDao" scope="prototype"></bean>
+	
+</beans>
