@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <!-- 일반적으로 값을 저장하는 value 객체의 경우 스프링 빈으로 등록 하는 경우는 드물다 -->
+   <bean name="user" class="kr.or.ddit.user.model.User">
+      <!-- 셋터 주입 -->
+      <property name="userId" value="brown"/> <!--문자열 -->
+       <property name="age" value="10"/> <!-- 숫자(정수) -->
+      <property name="reg_dt" value="2019-08-08"/> <!-- 등록일(날짜-java.util.Date) -->
+   </bean>
+   
+   <!-- 우리가 작성한 property editor를 스프링 프레임워크에서 사용할 수 있도록 등록 -->
+<!--    <bean name="custemEditorConfigurer" class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+      <property name="propertyEditorRegistrars">
+         <list>
+            <bean class="kr.or.ddit.type.CustomDatePropertyEditor"/>
+         </list>
+      </property>
+      
+   </bean> -->
+   
+   <!-- 스프링에서 빈이름을 미리 정해 놓음 : conversionService -->
+<!--    <bean name="conversionService"
+      class="org.springframework.context.support.ConversionServiceFactoryBean">
+      <property name="converters">
+         <set>
+            <bean class="kr.or.ddit.type.CustomDateConverter"/>
+         </set>
+      </property>
+   </bean> -->
+   
+   <!-- formatting conversion service : 별도의 converter 등록 없이 주입 하고자하는 필드에 어노테이션을 적용 
+      **conversionService와 마찬가지로 스프링 프레임워크에서 사용하는 이름이 정해져 있다
+      **필드마다 주입하는 날짜의 포맷 변경가능
+      .yyyy-MM-dd
+      .MM-dd-yyy
+   -->
+   <bean name="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+   </bean>
+</beans>

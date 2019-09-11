@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean name="profilingAspect" class="kr.or.ddit.aop.ProfilingAspect"/>
+	<aop:config>
+		<!-- 포인트컷 설정 : 공통의 관심사항을 적용할 부분을 설정(ex : 특정 패키지에 존재하는 모든 클래스의 메소드) -->
+		<!-- 
+			kr.or.ddit..service
+			kr.or.ddit.user.detail.service
+			kr.or.ddit.user.service
+		 -->
+		 
+		 <!-- kr.or.ddit패키지 하위중에 service 패키지안의 모든 클래스의 메소드가 실행될 때 -->
+		<aop:pointcut id="pointcut" expression="execution(* kr.or.ddit..service.*.*(..))"/>
+		<aop:aspect ref="profilingAspect">
+			<aop:before pointcut-ref="pointcut" method="before"/>
+			<aop:after pointcut-ref="pointcut" method="after"/>
+			<aop:around pointcut-ref="pointcut" method="around"/>
+		</aop:aspect>
+	</aop:config>
+	
+	<!-- userService -->
+	<context:component-scan base-package="kr.or.ddit"/>
+	<context:annotation-config/>
+	
+</beans>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="prod">
+
+  <select id="getProdList" parameterType="String" resultType="prodVO">
+   select b.lprod_nm as lprod_nm,
+          b.lprod_gu as prod_lgu,
+          c.BUYER_NAME as buyer_name,
+          a.prod_id as prod_id,
+          a.prod_name as prod_name,
+          a.prod_price as prod_price
+  from prod a , lprod b, buyer c
+  where  b.LPROD_GU = a.PROD_LGU
+  and a.prod_buyer = c.buyer_id
+  and b.lprod_gu = #{prod_lgu}
+  </select>
+
+</mapper>
