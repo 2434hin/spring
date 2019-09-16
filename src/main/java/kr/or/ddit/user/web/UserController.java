@@ -26,6 +26,6 @@ public class UserController {
 		return "user/view";
 		
 		// prefix + viewName + suffix
-		// WEB-INF/views/user/view.jsp
+		// W+
 	}
 }
