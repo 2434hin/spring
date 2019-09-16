@@ -113,5 +113,4 @@ Insert into USERS (USERID,USERNM,PASS,REG_DT,ALIAS,ADDR1,ADDR2,ZIPCODE,FILENAME,
 Insert into USERS (USERID,USERNM,PASS,REG_DT,ALIAS,ADDR1,ADDR2,ZIPCODE,FILENAME,REALFILENAME,REALFILENAME2) values ('xuserid99','xusernm99','xuserid99pass',to_date('2016/11/25','YYYY/MM/DD'),'xuseralias99',null,null,null,null,null,null);
 Insert into USERS (USERID,USERNM,PASS,REG_DT,ALIAS,ADDR1,ADDR2,ZIPCODE,FILENAME,REALFILENAME,REALFILENAME2) values ('xuserid100','xusernm100','xuserid100pass',to_date('2016/11/15','YYYY/MM/DD'),'xuseralias100',null,null,null,'공유1.png','e:\upload\2019\08\0667f6f7-2446-4486-bcb5-2addc7c043ab.png',null);
 
-
 commit;

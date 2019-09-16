@@ -4,6 +4,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
+import kr.or.ddit.lprod.dao.ILprodDao;
+import kr.or.ddit.lprod.dao.LprodDao;
+import kr.or.ddit.lprod.service.ILprodService;
+import kr.or.ddit.lprod.service.LprodService;
+import kr.or.ddit.prod.repasitory.IProdDao;
+import kr.or.ddit.prod.repasitory.ProdDao;
 import kr.or.ddit.user.dao.IUserDao;
 import kr.or.ddit.user.dao.UserDao;
 import kr.or.ddit.user.service.IUserService;
@@ -31,6 +37,5 @@ public class ApplicationJavaConfigT1 {
 		
 		return new UserService(userDao());
 	}
-	
 	
 }
