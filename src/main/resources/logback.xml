@@ -31,7 +31,7 @@
   	<appender-ref ref="STDOUT2" />
   </logger>
   
-  <logger name="org.springframework" level="warn">
+  <logger name="org.springframework" level="debug">
   	<appender-ref ref="STDOUT2" />
   </logger>
   

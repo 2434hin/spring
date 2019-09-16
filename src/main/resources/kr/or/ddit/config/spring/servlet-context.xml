@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- @Controller 어노테이션이 붙은 클래스만 스캔 -->
+	<context:component-scan base-package="kr.or.ddit" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	
+	<context:annotation-config/>
+
+	<!-- 
+		@Controller에 있는 @RequestMapping을 처리해준다 
+		HandlerAdapter 설정
+	-->
+	<mvc:annotation-driven/>
+	
+	<!-- 
+		스프링이 처리하지 못하는 요청에 대해서  was(servlet-container)에 있는
+		default servlet으로 처리 위임
+	-->
+	<mvc:default-servlet-handler/>
+
+	<!-- view resolver : jsp : internalResourceViewResolver -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/"/>	<!-- 접두어 -->
+		<property name="suffix" value=".jsp"/>	<!-- 접미어 -->
+		<!-- 
+			Controller에서 리턴하는 viewName prefix와 suffix가 결합되서 jsp 경로를 판단 
+			ex : controller 리턴한 viewName : index
+				 prefix + viewName + suffix
+				 /WEB-INF/views(index).jsp => /WEB-INF/views/index.jsp	
+		-->
+	</bean>
+</beans>
