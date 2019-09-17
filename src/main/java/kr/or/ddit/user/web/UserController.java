@@ -86,19 +86,14 @@ public class UserController {
 	 * Method 설명 : 사용자 페이징 리스트 조회
 	 */
 	@RequestMapping(path = "userPagingList", method = RequestMethod.GET)
-	public String userPagingList(Model model, Integer page, Integer pagesize) {
+	//public String userPagingList(int page, int pagesize, Model model) {
+	public String userPagingList(Page page, Model model) {
 
-	    page = page == null ? 1 : page;
-	    pagesize = pagesize == null ? 10 : pagesize;
-		
-		Page p = new Page(page, pagesize);
-		
-		model.addAttribute("pageVo", p);
+		model.addAttribute("pageVo", page);
 		  
-		Map<String, Object> resultMap = userService.getUserPagingList(p);
+		Map<String, Object> resultMap = userService.getUserPagingList(page);
 		  
-		model.addAttribute("userList", resultMap.get("userList"));
-		model.addAttribute("paginationSize", resultMap.get("paginationSize"));
+		model.addAllAttributes(resultMap);
 		
 		return "user/userPagingList";
 	}
