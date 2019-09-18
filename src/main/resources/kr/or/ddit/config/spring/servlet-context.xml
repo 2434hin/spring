@@ -7,9 +7,10 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<!-- @Controller 어노테이션이 붙은 클래스만 스캔 -->
+	<!-- @Controller, @ControllerAdvice 어노테이션이 붙은 클래스를 스캔 -->
 	<context:component-scan base-package="kr.or.ddit" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
 	</context:component-scan>
 	
 	<context:annotation-config/>
@@ -43,5 +44,14 @@
 		<property name="maxUploadSize" value="5242880"/>	<!-- 5mb -->
 		<property name="maxUploadSizePerFile" value="26214400"/> <!-- 25mb -->
 		<!--  1000000bytes = 1000kbytes = 1mb -->
+	</bean>
+	
+	<!-- resource bundle bean id는 messageSource로 고정 되어있다 -->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>classpath:kr/or/ddit/config/msg/error</value>
+			</list>
+		</property>
 	</bean>
 </beans>
