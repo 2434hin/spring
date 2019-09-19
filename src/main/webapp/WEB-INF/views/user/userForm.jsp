@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -84,7 +85,7 @@
 
 				<%-- 파일전송은 post메소드만 가능 --%>
 				<form id="frm" class="form-horizontal" role="form"
-					  action="${cp }/userForm" method="post"
+					  action="${cp }/user/userForm" method="post"
 					  enctype="multipart/form-data">
 
 					<div class="form-group">
@@ -100,7 +101,7 @@
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="userId" name="userId"
 								placeholder="사용자 아이디" value="${param.userId }">
-								${userIdMsg }
+							<font color="red"><form:errors path="user.userId"/></font>
 						</div>
 					</div>
 

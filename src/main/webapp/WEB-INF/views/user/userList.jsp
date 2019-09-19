@@ -71,7 +71,7 @@
 
 <body>
 
-	<form id="frm" action="${cp }/user" method="get">
+	<form id="frm" action="${cp }/user/user" method="get">
 		<input type="hidden" id="userId" name="userId"/>
 	</form>
 
@@ -99,21 +99,6 @@
 									<th>사용자 별명</th>
 									<th>등록일시</th>
 								</tr>
-
-<%-- 								<%
-									List<User> userList = (List<User>) request.getAttribute("userList");
-									for (User userVo : userList) {
-								%>
-
-								<tr>
-									<td><%=userVo.getUserId()%></td>
-									<td><%=userVo.getUserNm()%></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<%
-									}
-								%> --%>
 
 								<%-- for(User user : userList) --%>
 								<c:forEach items="${userList}" var="user">

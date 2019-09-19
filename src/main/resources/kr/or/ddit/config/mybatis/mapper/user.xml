@@ -33,7 +33,7 @@
   <!-- 사용자 등록 -->
   <insert id="insertUser" parameterType="user">
   	insert into users(userId, userNm, pass, reg_dt, alias, addr1, addr2, zipcode, filename, realfilename)
-    values(#{userId}, #{userNm}, #{pass}, #{reg_dt}, #{alias}, #{addr1}, #{addr2}, #{zipcode}, #{filename}, #{realfilename})
+    values(#{userId}, #{userNm}, #{pass}, #{reg_dt}, #{alias}, #{addr1}, #{addr2}, #{zipcode}, #{filename, jdbcType=VARCHAR}, #{realfilename, jdbcType=VARCHAR})
   </insert>
 
   <!-- 사용자 삭제 -->
@@ -43,7 +43,7 @@
 
   <update id="updateUser" parameterType="user">
   	update users set userNm = #{userNm}, alias = #{alias}, reg_dt = #{reg_dt}, addr1 = #{addr1},
-     addr2 = #{addr2}, zipcode = #{zipcode}, pass = #{pass}, filename = #{filename}, realfilename = #{realfilename}
+     addr2 = #{addr2}, zipcode = #{zipcode}, pass = #{pass}, filename = #{filename, jdbcType=VARCHAR}, realfilename = #{realfilename, jdbcType=VARCHAR}
      where userId = #{userId}
   </update>
 </mapper>

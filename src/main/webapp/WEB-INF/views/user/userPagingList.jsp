@@ -71,7 +71,7 @@
 
 <body>
 
-	<form id="frm" action="${cp }/user" method="get">
+	<form id="frm" action="${cp }/user/user" method="get">
 		<input type="hidden" id="userId" name="userId"/>
 	</form>
 
@@ -128,7 +128,7 @@
 							</table>
 						</div>
 
-						<a href="${cp }/userForm" class="btn btn-default pull-right">사용자 등록<%=request.getParameter("page") %> / ${param.page }</a>
+						<a href="${cp }/user/userForm" class="btn btn-default pull-right">사용자 등록<%=request.getParameter("page") %> / ${param.page }</a>
 
 						<div class="text-center">
 							<ul class="pagination">

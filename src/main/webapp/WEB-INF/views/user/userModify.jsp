@@ -56,13 +56,13 @@
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-				<form class="form-horizontal" role="form" action="${cp }/userModify" method="post"
+				<form class="form-horizontal" role="form" action="${cp }/user/userModify" method="post"
 					  enctype="multipart/form-data">
 
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>
 						<div class="col-sm-10">
-							<img src="${cp }/userPicture?userId=${user.userId }"/><br>
+							<img src="${cp }/user/userPicture?userId=${user.userId }"/><br>
 							<input type="file" id="picture" name="picture" placeholder="사용자 사진">
 						</div>
 					</div>
