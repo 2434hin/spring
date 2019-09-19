@@ -44,7 +44,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 				classpath:kr/or/ddit/config/spring/servlet-context.xml
-				classpath:kr/or/ddit/config/spring/context-interceptors.xml
+<!-- 				classpath:kr/or/ddit/config/spring/context-interceptors.xml -->
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>

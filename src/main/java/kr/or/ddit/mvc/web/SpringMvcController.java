@@ -24,7 +24,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import kr.or.ddit.exception.NoFileException;
 import kr.or.ddit.mvc.model.Main;
@@ -40,6 +42,9 @@ import oracle.net.aso.u;
 public class SpringMvcController {
    
    private static final Logger logger = LoggerFactory.getLogger(SpringMvcController.class);
+   
+   @javax.annotation.Resource(name="jsonView")
+   private View jsonView;
    
    //@RequestMapping이 붙은 메소드가 실행되기 전에 @ModelAttribute 메소드가 먼저 실행되고
    // 해당 메소드가 리턴하는 값을 Model 객체에 자동으로 넣어준다
@@ -229,4 +234,38 @@ public class SpringMvcController {
 
 	   return "mvc/view";
    }
+   
+   @RequestMapping("jsonView")
+   public String jsonView(Model model) {
+	   List<String> rangers = new ArrayList<String>();
+	   rangers.add("brown");
+	   rangers.add("cony");
+	   rangers.add("sally");
+	   
+	   model.addAttribute("rangers", rangers);
+	   
+	   return "jsonView";
+   }
+   
+   @RequestMapping("jsonView2")
+   public View jsonView2(Model model) {
+	   List<String> rangers = new ArrayList<String>();
+	   rangers.add("brown");
+	   rangers.add("cony");
+	   rangers.add("sally");
+	   
+	   model.addAttribute("rangers", rangers);
+	   
+	   return jsonView;
+	   //return new MappingJackson2JsonView();
+   }
+   
+   @RequestMapping("fileDownloadView")
+   public String fileDownloadView(String pictureName, Model model) {
+	   
+	   model.addAttribute("pictureName", pictureName);
+	   
+	   return "fileDownloadView";
+   }
+   
 }
