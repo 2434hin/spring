@@ -1,6 +1,5 @@
 package kr.or.ddit.user.model;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpSessionBindingEvent;
@@ -10,6 +9,9 @@ import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 import kr.or.ddit.encrypt.kisa.sha256.KISA_SHA256;
 
@@ -29,6 +31,7 @@ public class User implements HttpSessionBindingListener {
 	private String realfilename; // 물리 파일명
 	private String realfilename2; // 물리 파일명
 
+	@JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date reg_dt; // 등록 일자
 	private int age;
@@ -89,10 +92,10 @@ public class User implements HttpSessionBindingListener {
 		return reg_dt;
 	}
 
-	public String getReg_dt_fmt() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		return sdf.format(reg_dt);
-	}
+//	public String getReg_dt_fmt() {
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		return sdf.format(reg_dt);
+//	}
 
 	public void setReg_dt(Date reg_dt) {
 		this.reg_dt = reg_dt;
