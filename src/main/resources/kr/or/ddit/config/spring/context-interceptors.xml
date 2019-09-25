@@ -12,6 +12,16 @@
 			<bean class="kr.or.ddit.interceptor.PerformanceCheckInterceptor"></bean>
 		</mvc:interceptor>
 		
+<!-- 		<mvc:interceptor> -->
+<!-- 			<mvc:mapping path="/**"/> -->
+<!-- 			<mvc:exclude-mapping path="/login"/> 로그인 화면, 로그인 요청 -->
+<!-- 			<mvc:exclude-mapping path="/css/**"/> -->
+<!-- 			<mvc:exclude-mapping path="/js/**"/> -->
+<!-- 			<mvc:exclude-mapping path="/bootstrap/**"/> -->
+<!-- 			<mvc:exclude-mapping path="/error/**"/> -->
+<!-- 			<bean class="kr.or.ddit.interceptor.SessionCheckInterceptor"></bean> -->
+<!-- 		</mvc:interceptor> -->
+		
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/login"/> <!-- 로그인 화면, 로그인 요청 -->
@@ -19,7 +29,9 @@
 			<mvc:exclude-mapping path="/js/**"/>
 			<mvc:exclude-mapping path="/bootstrap/**"/>
 			<mvc:exclude-mapping path="/error/**"/>
-			<bean class="kr.or.ddit.interceptor.SessionCheckInterceptor"></bean>
+			<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+				<property name="paramName" value="language"/>
+			</bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+ "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+ 
+ <tiles-definitions>
+ 	<definition name="base" template="/WEB-INF/views/commonJsp/base.jsp">
+ 		<put-attribute name="header" value="/WEB-INF/views/commonJsp/header.jsp"/>
+ 		<put-attribute name="content" value=""/>
+ 		<put-attribute name="left" value="/WEB-INF/views/commonJsp/left.jsp"/>
+ 	</definition>
+ 	
+ 	<!-- 사용자 페이징 리스트 -->
+ 	<definition name="tiles.userPagingList" extends="base">
+ 		<put-attribute name="content" value="/WEB-INF/views/user/userPagingListContent.jsp"/>
+ 	</definition>
+ 	
+ 	<!-- 사용자 상세조회 -->
+ 	<!-- 
+ 		1. tiles definition 생성
+ 		2. controller return 문자열 수정
+ 	 -->
+ 	<definition name="tiles.user" extends="base">
+ 		<put-attribute name="content" value="/WEB-INF/views/user/userContent.jsp"/>
+ 	</definition>
+ 	 
+ </tiles-definitions>

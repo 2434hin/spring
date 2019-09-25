@@ -13,12 +13,18 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import jdk.nashorn.internal.ir.annotations.Ignore;
+import kr.or.ddit.config.DatasourceConfig;
+import kr.or.ddit.config.RootConfig;
+import kr.or.ddit.config.spring.DatasourceConfigTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
+/*
 @ContextConfiguration(locations = {
 		"classpath:kr/or/ddit/config/spring/context-root.xml",
 		"classpath:kr/or/ddit/config/spring/context-datasource-test.xml",
 		"classpath:kr/or/ddit/config/spring/context-transaction.xml"})
+*/
+@ContextConfiguration(classes = {RootConfig.class, DatasourceConfigTest.class})
 public class RootTestConfig {
 	
 	@Resource(name = "datasource")

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +23,20 @@
 </head>
 <body>
 	<h2>mvc/view.jsp</h2>
+	
+	<h3>i18n</h3>
+	<form action="${cp }/mvc/i18n">
+		<select name="language">
+			<option value="ko">한국어</option>
+			<option value="zh">중국어</option>
+			<option value="en">영어(English)</option>
+		</select>
+		<input type="submit" value="전송"/>
+	</form>
+	<spring:message code="GREETING"/>
+	<spring:message code="VISITOR">
+		<spring:argument value="brown"/>
+	</spring:message>
 	
 	<h3>spring validator jsr303</h3>
 	<form action="${cp }/mvc/jsr303">

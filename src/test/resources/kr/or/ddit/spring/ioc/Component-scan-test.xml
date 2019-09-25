@@ -22,7 +22,9 @@
 		<context:include-filter>, <context:exclude-filter> 두엘리멘트를 활용하여
 		어노체이션 필터를 설정
 	-->
-	<context:component-scan base-package="kr.or.ddit">
+	<context:component-scan base-package="kr.or.ddit" use-default-filters="false">
+	  <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+      <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
 	</context:component-scan>
 	
 	<!-- 스캔 이후에 @Resourd, @Autowired, @Inject 어노테이션엥 대한 후처리 -->
