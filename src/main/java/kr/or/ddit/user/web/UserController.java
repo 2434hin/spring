@@ -14,11 +14,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.ddit.common.model.Page;
@@ -293,7 +294,19 @@ public class UserController {
 		return "jsonView";
 	}
 	
-	//:)
+	// :)
+	@RequestMapping(path = "userPagingListAjaxRequestBody", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> userPagingListAjaxRequestBody(@RequestBody Page page, Model model) {
+		
+		Map<String, Object> resultMap = userService.getUserPagingList(page);
+		resultMap.put("pageVo", page);
+		
+		// {userList : [{userId : "brown", alias : "곰", ...}, {...}, {...}],
+		// pagesize : 11}
+		return resultMap;
+	}
+	
 	/**
 	 * 
 	 * Method : userPagingListHtmlAjax

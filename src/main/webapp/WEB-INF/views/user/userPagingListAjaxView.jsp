@@ -24,7 +24,6 @@
 	//문서 로딩이 완료되고 나서
 	$(document).ready(function(){
 	   
-		//:)
 		// 문서로딩이 되면 자동으로 1페이지 리스트를 가져온다.
 		getUserHtmlList(1,10);
 		
@@ -60,11 +59,12 @@
 	   });
 	});
 	
-	//:)
 	// ajax 응답을 html로 받는다.(html javascript로 생성하는 작업을 줄인다)
 	function getUserHtmlList(page, pagesize) {
 	   $.ajax({
 	      url : "${cp}/user/userPagingListHtmlAjax",
+	      
+	      // 파라미터 -> json
 	      data : "page=" + page + "&pagesize=" + pagesize,
 	      success : function (data) {
 	    	  
@@ -74,8 +74,26 @@
 	         $('#userListTbody').html(html[0]);
 	         $(".pagination").html(html[1]);
 	         
-	         //createUserListTbody(data.userList);   //userList html 생성
-	         //createPagination(data.pageVo, data.paginationSize);   //페이지네이션 html생성
+	      }
+	   });
+	}
+	
+	//:) 
+	function getUserListRequestBody(page, pagesize) {
+		var param = {};
+		param.page = page;
+		param.pagesize = pagesize;
+		console.log("param : " + param);
+		
+	   $.ajax({
+	      url : "${cp}/user/userPagingListAjaxRequestBody",
+	      contentType : "application/json",
+	      method : "post",
+	      dataType : "json",
+	      data : JSON.stringify(param),
+	      success : function (data) {
+	         createUserListTbody(data.userList);   //userList html 생성
+	         createPagination(data.pageVo, data.paginationSize);   //페이지네이션 html생성
 	         
 	      }
 	   });
