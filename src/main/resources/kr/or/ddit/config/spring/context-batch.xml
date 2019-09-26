@@ -5,6 +5,14 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<batch:job-repository id="jobRepository"
+						  data-source="datasource"
+						  transaction-manager="transactionManager"
+						  isolation-level-for-create="DEFAULT"/>
+						  
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="datasource"/>
+	</bean>
 
 	<!-- jobrepository -->
 	<bean name="jobRepository" class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">
@@ -15,21 +23,28 @@
 		<property name="jobRepository" ref="jobRepository"/>
 	</bean>
 	
-	<!-- 트랜잭션 매니저(형식상) -->
-	<bean name="transactionManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager"/>
+	<!-- mybatis 모듈에서 제공해주는 reader 활용 -->
+	<bean id="updatePassBatchReader" class="org.mybatis.spring.batch.MyBatisCursorItemReader">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		<property name="queryId" value="batch.selectUsers"/>
+	</bean>
 	
-	<!-- batch reader, processor, writer 빈 등록 -->
-	<bean id="rangerReader" class="kr.or.ddit.batch.simple.RangerReader"/>
-	<bean id="rangerProcessor" class="kr.or.ddit.batch.simple.RangerProcessor"/>
-	<bean id="rangerWriter" class="kr.or.ddit.batch.simple.RangerWriter"/>
+	<!-- processor : 비밀번호를 암호화 한다. -->
+	<bean id="updatePassBatchProcessor" class="kr.or.ddit.batch.user.UpdatePassBatchProcessor"/>
 	
-	<batch:job id="rangerJob" restartable="true">
+	<!-- 업데이트 된 비밀번호를 반영할 writer -->
+	<bean id="updatePassBatchWriter" class="org.mybatis.spring.batch.MyBatisBatchItemWriter">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		<property name="statementId" value="batch.updateUserPass"/>
+	</bean>
+	
+	<batch:job id="updatePassJob" restartable="true">
 		<batch:step id="step1" allow-start-if-complete="true">
 			<batch:tasklet>
-				<batch:chunk commit-interval="1"
-					reader="rangerReader"
-					processor="rangerProcessor"
-					writer="rangerWriter">
+				<batch:chunk commit-interval="2"
+					reader="updatePassBatchReader"
+					processor="updatePassBatchProcessor"
+					writer="updatePassBatchWriter">
 				</batch:chunk>
 			</batch:tasklet>
 		</batch:step>
