@@ -1,0 +1,39 @@
+<configuration>
+
+  <!-- appender : 어디다 로그를 출력할지, 
+  	   layout : 로그를 어떤 형식으로 출력할지, 
+  	   logger : 로그를 출력담당, 기본적으로 계층구조를 갖고있다. -->
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <!-- encoders are assigned the type
+         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+  
+  <appender name="STDOUT2" class="ch.qos.logback.core.ConsoleAppender">
+    <!-- encoders are assigned the type
+         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+    <encoder>
+      <pattern>stdout2 %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+  
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>e:\log\test.log</file>
+		<encoder>
+			<pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+		</encoder>
+	</appender>
+
+
+  <logger name="kr.or.ddit" level="debug">
+  	<appender-ref ref="STDOUT2" />
+  </logger>
+  
+<!--   <logger name="org.springframework" level="warn"> -->
+  <logger name="org.springframework" level="debug">
+  	<appender-ref ref="STDOUT2" />
+  </logger>
+
+</configuration>
